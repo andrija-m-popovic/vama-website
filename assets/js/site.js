@@ -254,6 +254,7 @@
     if (endpoint) {
       var fd = new FormData(form);
       fd.set("_subject", opts.subject);
+      fd.set("form_type", opts.inbox);
       var em = form.querySelector('input[type="email"]');
       if (em) fd.set("_replyto", em.value.trim());
       return fetch(endpoint, { method: "POST", body: fd, headers: { Accept: "application/json" } })
@@ -477,6 +478,7 @@
       if (endpoint) {
         var fd = new FormData(fit);
         fd.set("_subject", subject);
+        fd.set("form_type", "ai");
         var em = fit.querySelector('input[type="email"]');
         if (em) fd.set("_replyto", em.value.trim());
         fetch(endpoint, { method: "POST", body: fd, headers: { Accept: "application/json" } })

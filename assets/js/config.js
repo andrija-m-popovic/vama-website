@@ -18,7 +18,7 @@ window.VAMA_CONFIG = {
  "ai_delivery": "about 10 business days",
  "immigration_reply_sla": "1 business day",
  "rush_threshold_days": 14,
- "form_endpoint_immigration": "",
- "form_endpoint_ai": "",
- "form_endpoint_general": ""
+ "form_endpoint_immigration": "https://usebasin.com/f/1c83281af9aa",
+ "form_endpoint_ai": "https://usebasin.com/f/1c83281af9aa",
+ "form_endpoint_general": "https://usebasin.com/f/1c83281af9aa"
 };

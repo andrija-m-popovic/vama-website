@@ -850,3 +850,22 @@ a.ledger__row:hover .ledger__go { transform: translateX(4px); }
   .opening__photo img { aspect-ratio: 4 / 3; object-position: 50% 30%; }
   .opening__caption { position: static; margin-top: .6rem; box-shadow: none; background: none; padding: 0; font-size: .85rem; }
 }
+
+/* Photography (26 September 2026): on wide screens the opening is the 16:9 founder portrait
+   with the copy over its quiet left side; 901-1100 px keeps the two-column grid with the 4:5
+   portrait; phones use the 4:5 portrait cropped to 4:3 above the copy. */
+@media (min-width: 1101px) {
+  .opening { display: block; position: relative; min-height: 600px; }
+  .opening__photo { position: absolute; inset: 0; margin: 0; }
+  .opening__photo picture { display: block; height: 100%; }
+  .opening__photo img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: 100% 50%; border-radius: 14px; }
+  .opening__photo::after { content: ""; position: absolute; inset: 0; border-radius: 14px; pointer-events: none;
+    background: linear-gradient(90deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 30%, rgba(255,255,255,.28) 48%, rgba(255,255,255,0) 60%); }
+  .opening__copy { position: relative; z-index: 1; max-width: 48%; padding: 28px 0 72px clamp(28px, 3vw, 44px); }
+  .opening h1 { font-size: clamp(2.5rem, 3vw, 3.25rem); max-width: 11.5em; margin-bottom: .6rem; }
+  .opening .lead { font-size: 1.06rem; max-width: 31em; }
+  .opening .entrances { margin-top: 1.1rem; gap: .55rem; }
+  .opening .entrance { padding-top: .7rem; padding-bottom: .7rem; }
+  .opening .standard { margin-top: 1rem; }
+  .opening__caption { left: clamp(28px, 3vw, 48px); bottom: 20px; z-index: 1; }
+}
