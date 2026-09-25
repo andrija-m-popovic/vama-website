@@ -869,3 +869,73 @@ a.ledger__row:hover .ledger__go { transform: translateX(4px); }
   .opening .standard { margin-top: 1rem; }
   .opening__caption { left: clamp(28px, 3vw, 48px); bottom: 20px; z-index: 1; }
 }
+
+/* ------------------------------------------------------------------
+   Premium pass (26 September 2026): larger, tighter display type; more
+   air between sections; white pages with hairlines instead of tinted
+   bands; editorial rows instead of bordered cards; photographs at 14 px
+   radius without drop shadows; a full-bleed closing call to action.
+   ------------------------------------------------------------------ */
+:root { --shadow-lg: 0 2px 4px rgba(20, 45, 115, .05), 0 16px 40px rgba(20, 45, 115, .09); }
+h2 { font-size: clamp(1.9rem, 3.2vw, 2.85rem); letter-spacing: -.028em; line-height: 1.06; }
+h3 { font-size: 1.22rem; }
+.lead { font-size: clamp(1.12rem, 1.65vw, 1.36rem); line-height: 1.5; }
+.section { padding: clamp(80px, 10vw, 148px) 0; }
+.section--tight { padding: clamp(56px, 7vw, 96px) 0; }
+.section--paper { background: #fff; border-top: 1px solid var(--line); }
+.section--cyan { background: var(--paper); }
+.section-head { margin-bottom: clamp(40px, 5.5vw, 72px); }
+.section-head .muted { font-size: 1.08rem; max-width: 40em; }
+.page-hero { background: #fff; }
+.page-hero__media img { border-radius: 14px; box-shadow: none; }
+.card--shadow { box-shadow: none; border-color: var(--line); }
+.entrance { border-radius: 10px; }
+.entrance:hover { box-shadow: none; }
+.opening__photo::after { background: linear-gradient(90deg, rgba(255,255,255,.74) 0%, rgba(255,255,255,.56) 30%, rgba(255,255,255,.22) 48%, rgba(255,255,255,0) 60%); }
+
+/* Photograph bands */
+.photo-band { margin: 0 0 clamp(44px, 6vw, 80px); }
+.photo-band img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 28%; border-radius: 14px; }
+.photo-band--inline { margin: clamp(32px, 4vw, 48px) 0; }
+.photo-band--inline img { aspect-ratio: 2 / 1; object-position: 50% 45%; }
+@media (max-width: 700px) { .photo-band img { aspect-ratio: 4 / 3; } }
+
+/* Founder */
+.founder { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; }
+.founder__photo img { border-radius: 14px; box-shadow: none; object-position: 50% 18%; }
+.founder__caption { margin-top: .8rem; font-size: .88rem; line-height: 1.35; color: var(--grey); }
+.founder__caption strong { display: block; color: var(--navy); font-size: .95rem; }
+.founder__creds { margin-top: 1.75rem; gap: 1rem; }
+
+/* Method: plain numerals instead of filled circles */
+.method li::before { background: none; color: var(--grey); width: auto; height: auto; font-size: .78rem; letter-spacing: .1em; content: counter(m, decimal-leading-zero); display: block; }
+
+/* Insight cards as editorial rows */
+.card--link { background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 1.6rem 0 1.4rem; }
+.card--link:hover { border-color: var(--navy); box-shadow: none; transform: none; }
+.card--link h3 { font-size: 1.3rem; letter-spacing: -.016em; }
+.card--link .tag { background: none; padding: 0; border-radius: 0; font-size: .74rem; letter-spacing: .09em; text-transform: uppercase; color: var(--grey); }
+.card--link .tag--ai { color: var(--navy); border-bottom: 2px solid var(--teal); }
+
+/* Quotes as editorial blocks */
+.quote { background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 1.5rem 0 0; }
+.quote blockquote { font-size: 1.28rem; line-height: 1.45; letter-spacing: -.01em; }
+.quote blockquote::before { color: var(--teal); font-size: 2.4rem; }
+
+/* Calls to action */
+.cta-band { border-radius: 16px; }
+.cta-band::after { display: none; }
+.cta-full { padding: clamp(88px, 11vw, 160px) 0; }
+.cta-full__inner { text-align: center; max-width: 720px; margin: 0 auto; }
+.cta-full h2 { color: #fff; font-size: clamp(2.2rem, 4vw, 3.4rem); margin-bottom: .6em; }
+.cta-full p { color: var(--cyan); font-size: 1.12rem; }
+.cta-full .fineprint { color: var(--ash); }
+.cta-full .fineprint a { color: #fff; }
+
+/* Hero clip: a 5-second play-once layer over shot 01 on wide screens only */
+.opening__video { display: none; }
+@media (min-width: 1101px) {
+  .opening__video { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 100% 50%; border-radius: 14px; opacity: 0; transition: opacity 700ms var(--ease-out); pointer-events: none; }
+  .opening__video.is-on { opacity: 1; }
+}
+.reduce-motion .opening__video { display: none; }

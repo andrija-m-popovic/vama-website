@@ -75,6 +75,34 @@
   var reduceMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
   var reduce = reduceMQ.matches;
   reduceMQ.addEventListener && reduceMQ.addEventListener("change", function (e) { reduce = e.matches; doc.classList.toggle("reduce-motion", reduce); });
+
+  /* ---------------- Hero clip (home opening): deferred, once, wide screens, no reduced motion or data saver ---------------- */
+  var heroClip = document.querySelector(".opening__video");
+  if (heroClip) {
+    var conn = navigator.connection || {};
+    var clipOk = !reduce && window.matchMedia("(min-width: 1101px)").matches && !conn.saveData && !/2g/.test(conn.effectiveType || "");
+    if (clipOk) {
+      var startClip = function () {
+        heroClip.addEventListener("playing", function () { heroClip.classList.add("is-on"); }, { once: true });
+        var p = heroClip.play();
+        if (p && p.catch) p.catch(function () { heroClip.classList.remove("is-on"); });
+      };
+      var whenVisible = function (fn) {
+        if (document.visibilityState !== "hidden") return fn();
+        document.addEventListener("visibilitychange", function once() {
+          if (document.visibilityState === "hidden") return;
+          document.removeEventListener("visibilitychange", once);
+          fn();
+        });
+      };
+      window.addEventListener("load", function () { setTimeout(function () { whenVisible(startClip); }, 900); });
+      document.addEventListener("visibilitychange", function () {
+        // Resume a clip the browser paused while the tab was hidden; never restart a finished one.
+        if (document.visibilityState === "visible" && heroClip.classList.contains("is-on") && heroClip.paused && !heroClip.ended) startClip();
+      });
+      reduceMQ.addEventListener && reduceMQ.addEventListener("change", function (e) { if (e.matches) { heroClip.pause(); heroClip.classList.remove("is-on"); } });
+    }
+  }
   doc.classList.toggle("reduce-motion", reduce);
   var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var wideEnough = window.matchMedia("(min-width: 901px)").matches;
