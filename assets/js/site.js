@@ -116,7 +116,7 @@
       li.innerHTML = id ? '<a href="#' + id + '">' + el.getAttribute("data-log") + "</a>" : el.getAttribute("data-log");
       list.appendChild(li);
       if (count) count.textContent = seen + " of " + total;
-      if (list.children.length > 6) list.removeChild(list.firstElementChild);
+      if (wide && list.children.length > 6) list.removeChild(list.firstElementChild);
       log.classList.add("is-on");
     }
     if (wide && "IntersectionObserver" in window) {
