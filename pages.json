@@ -9,7 +9,7 @@
  {
   "path": "/about/",
   "title": "About Andrija Popović and VAMA Consulting Group",
-  "description": "VAMA Consulting Group is led by Andrija Popović, economist and PhD candidate in Macroeconomics, who personally leads every immigration documentation engagement and every AI operations audit.",
+  "description": "VAMA Consulting Group is led by Andrija Popović, an economist and PhD candidate in macroeconomics who has consulted since 2018 and personally leads every immigration documentation engagement and every workflow audit.",
   "section": "about",
   "noindex": false
  },
@@ -22,8 +22,8 @@
  },
  {
   "path": "/ai-operations/",
-  "title": "AI Revenue Leakage Audit for Service Businesses",
-  "description": "A fixed-scope audit of one workflow: interviews, process maps, a cost-of-delay range, ranked options, and a 90-day roadmap - including what not to automate. $3,500-$5,000, about 10 business days.",
+  "title": "AI Operations & Growth - Revenue Leakage Audit for Service Businesses",
+  "description": "A fixed-scope audit of one workflow: interviews, a workflow and handoff map, a cost-of-delay range built from your numbers, improvement options compared on the same problem, and a 90-day roadmap that says what not to automate. $3,500-$5,000, about 10 business days.",
   "section": "ai",
   "noindex": false
  },
@@ -78,8 +78,8 @@
  },
  {
   "path": "/immigration-documents/",
-  "title": "Immigration Business Documents for U.S. Immigration Counsel",
-  "description": "Business plans, financial models, market analysis, org charts, economic impact studies, and RFE audits for E-2, L-1, EB-1C, EB-2 NIW, EB-1A, and EB-5 matters. Prepared for counsel's review. VAMA is not a law firm.",
+  "title": "Immigration Business Services - Business Plans and Financial Evidence for U.S. Immigration Counsel",
+  "description": "Business plans, financial models, market analysis, org charts, economic impact studies and RFE audits for E-2, L-1, EB-1C, EB-2 NIW, EB-1A and EB-5 matters, prepared for counsel's review from locked inputs and one consolidated round of feedback. VAMA is not a law firm.",
   "section": "immigration",
   "noindex": false
  },
@@ -99,8 +99,8 @@
  },
  {
   "path": "/",
-  "title": "VAMA Consulting Group - Immigration Business Documents and AI Operations Audits",
-  "description": "Business plans, financial models, and economic impact studies for U.S. immigration counsel - and fixed-scope audits that show owner-led businesses where leads, quotes, and staff time leak before they spend on AI.",
+  "title": "VAMA Consulting Group - Business Evidence for Immigration Counsel, Workflow Audits for Service Businesses",
+  "description": "Business plans, financial models and economic impact studies prepared for U.S. immigration counsel's review, and a fixed-scope Revenue Leakage Audit of one workflow for owner-led service businesses. Every number with a source.",
   "section": "home",
   "noindex": false
  },
@@ -156,7 +156,7 @@
  {
   "path": "/work/",
   "title": "Work - Case Library, Sample Audit, and Client Feedback",
-  "description": "Evidence behind VAMA's two practices - an anonymized immigration case library filterable by visa, a sample AI Revenue Leakage Audit, and verified client feedback.",
+  "description": "Evidence behind VAMA's two practices - an anonymized immigration case library filterable by visa, a sample Revenue Leakage Audit, and verified client feedback, each labeled for exactly what it is.",
   "section": "work",
   "noindex": false
  },

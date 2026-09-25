@@ -57,6 +57,87 @@
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
+  /* ---------------- Stagger groups ---------------- */
+  var staggerEls = document.querySelectorAll("[data-stagger]");
+  staggerEls.forEach(function (g) {
+    Array.prototype.forEach.call(g.children, function (c, i) { c.style.transitionDelay = Math.min(i * 60, 480) + "ms"; });
+  });
+  if ("IntersectionObserver" in window && staggerEls.length) {
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-visible"); so.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
+    staggerEls.forEach(function (el) { so.observe(el); });
+  } else {
+    staggerEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  /* ---------------- Layered heroes: scroll + pointer, transform only ---------------- */
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  document.querySelectorAll(".hero-stage").forEach(function (stage) {
+    stage.querySelectorAll(".plane").forEach(function (pl) { pl.style.setProperty("--rate", pl.getAttribute("data-rate") || "0.3"); });
+    requestAnimationFrame(function () { stage.classList.add("is-live"); });
+    if (reduce) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = stage.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));  // 0 entering, 1 leaving
+      stage.style.setProperty("--hp", (p - 0.5).toFixed(3));
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+    if (finePointer) {
+      var host = stage.closest(".page-hero, .home-hero") || stage;
+      host.addEventListener("pointermove", function (e) {
+        var b = host.getBoundingClientRect();
+        stage.style.setProperty("--mx", ((e.clientX - b.left) / b.width - 0.5).toFixed(3));
+        stage.style.setProperty("--my", ((e.clientY - b.top) / b.height - 0.5).toFixed(3));
+      });
+      host.addEventListener("pointerleave", function () { stage.style.setProperty("--mx", "0"); stage.style.setProperty("--my", "0"); });
+    }
+  });
+
+  /* ---------------- Signature move: the assumptions log writes itself ---------------- */
+  var log = document.querySelector(".evidence-log");
+  var logged = document.querySelectorAll("[data-log]");
+  if (log && logged.length) {
+    var list = log.querySelector(".evidence-log__list");
+    var count = log.querySelector(".evidence-log__count");
+    var seen = 0, total = logged.length;
+    var wide = window.matchMedia("(min-width: 1181px)").matches;
+    function add(el) {
+      if (el.dataset.logged) return;
+      el.dataset.logged = "1";
+      seen++;
+      var li = document.createElement("li");
+      var id = el.id;
+      li.innerHTML = id ? '<a href="#' + id + '">' + el.getAttribute("data-log") + "</a>" : el.getAttribute("data-log");
+      list.appendChild(li);
+      if (count) count.textContent = seen + " of " + total;
+      if (list.children.length > 6) list.removeChild(list.firstElementChild);
+      log.classList.add("is-on");
+    }
+    if (wide && "IntersectionObserver" in window) {
+      var lo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { add(en.target); lo.unobserve(en.target); } });
+      }, { rootMargin: "0px 0px -35% 0px", threshold: 0.2 });
+      logged.forEach(function (el) { lo.observe(el); });
+      // hide once the footer is reached so it never covers the end
+      var footer = document.querySelector(".site-footer");
+      if (footer) new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { log.classList.toggle("is-on", !en.isIntersecting && seen > 0); });
+      }, { threshold: 0.05 }).observe(footer);
+    } else {
+      // narrow screens: render the full log as a static list before the footer
+      log.classList.add("evidence-log--static");
+      logged.forEach(add);
+      if (count) count.textContent = total + " logged on this page";
+    }
+    window.vamaTrack && log.addEventListener("click", function (e) { if (e.target.closest("a")) window.vamaTrack("assumptions_log_click"); });
+  }
+
   /* ---------------- Filter chips (cases, insights) ---------------- */
   document.querySelectorAll("[data-filter-group]").forEach(function (group) {
     var target = document.getElementById(group.getAttribute("data-filter-group"));
@@ -250,7 +331,7 @@
           goSuccess(imm.getAttribute("data-success"), via);
         })
         .catch(function () {
-          if (btn) { btn.disabled = false; btn.textContent = "Send scope request"; }
+          if (btn) { btn.disabled = false; btn.textContent = "Send the matter details"; }
           statusMsg(imm, "<strong>That did not go through.</strong> Please email <a href=\"mailto:" + emailFor("immigration") + "\">" + emailFor("immigration") + "</a> directly - your answers are below so nothing is lost.<pre style=\"white-space:pre-wrap;margin:.75rem 0 0;font:inherit\">" + summaryText(rows).replace(/</g, "&lt;") + "</pre>", "no");
         });
     });
@@ -309,7 +390,7 @@
       if (!url) { frameHost.innerHTML = '<div class="notice notice--warn"><p>Booking link not configured yet. Email <a href="mailto:' + emailFor("ai") + '">' + emailFor("ai") + "</a> and we will send times.</p></div>"; return; }
       var f = document.createElement("iframe");
       f.src = url;
-      f.title = "Book a 20-minute fit call with VAMA";
+      f.title = "Book a fit call with VAMA";
       f.loading = "lazy";
       frameHost.appendChild(f);
     }
