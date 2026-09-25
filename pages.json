@@ -1,0 +1,240 @@
+[
+ {
+  "path": "/404.html",
+  "title": "Page not found",
+  "description": "The page you were looking for has moved or does not exist. Choose immigration business documents or AI operations to continue.",
+  "section": "none",
+  "noindex": true
+ },
+ {
+  "path": "/about/",
+  "title": "About Andrija Popović and VAMA Consulting Group",
+  "description": "VAMA Consulting Group is led by Andrija Popović, economist and PhD candidate in Macroeconomics, who personally leads every immigration documentation engagement and every AI operations audit.",
+  "section": "about",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/book-fit-call/",
+  "title": "Book a 20-Minute Fit Call - AI Revenue Leakage Audit",
+  "description": "Answer 5 quick questions and pick a time. A 20-minute call to decide whether a Revenue Leakage Audit of one workflow is worth it for your business.",
+  "section": "ai",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/",
+  "title": "AI Revenue Leakage Audit for Service Businesses",
+  "description": "A fixed-scope audit of one workflow: interviews, process maps, a cost-of-delay range, ranked options, and a 90-day roadmap - including what not to automate. $3,500-$5,000, about 10 business days.",
+  "section": "ai",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/sample-audit/",
+  "title": "Sample Revenue Leakage Audit - What the Deliverable Looks Like",
+  "description": "An illustrative sample of the VAMA Revenue Leakage Audit for a fictional 11-person HVAC and plumbing company - process map, leak evidence, cost ranges, ranked options, what not to automate, and a 90-day roadmap.",
+  "section": "ai",
+  "noindex": false
+ },
+ {
+  "path": "/contact/",
+  "title": "Contact VAMA Consulting Group",
+  "description": "Choose your path - immigration business documents or AI operations - so your request reaches the right inbox with the right questions. Or send a general message.",
+  "section": "contact",
+  "noindex": false
+ },
+ {
+  "path": "/contact/received/",
+  "title": "Message Received",
+  "description": "Your message has reached VAMA Consulting Group. We reply to general messages within 2 business days.",
+  "section": "contact",
+  "noindex": true
+ },
+ {
+  "path": "/immigration-documents/case-library/",
+  "title": "Immigration Business Plan Case Library - Anonymized Examples by Visa",
+  "description": "Anonymized examples of business plans, financial models, org charts, and economic analysis VAMA prepared for E-2, L-1, EB-1C, EB-2 NIW, EB-1A, and RFE matters. Filter by visa category.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/economic-impact-study/",
+  "title": "Economic Impact Study for EB-2 NIW and EB-5 Matters",
+  "description": "Economic impact studies for immigration counsel - output and job-years estimated with a disclosed BLS-based Type I input-output method, with sources, boundaries, and limits stated.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/for-applicants/",
+  "title": "Business Plans for Visa Applicants - How to Work with VAMA and Your Attorney",
+  "description": "For E-2, L-1, EB-1C, EB-2 NIW, EB-1A, and EB-5 applicants: how VAMA prepares business documents alongside your attorney, what to prepare, and what we will never promise.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/for-counsel/",
+  "title": "White-Label Business Plan Support for Immigration Law Firms",
+  "description": "White-label business plans, financial models, and economic analysis for immigration law firms. Counsel keeps strategy and the client relationship; VAMA carries the drafting. Start with one scoped pilot matter.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/",
+  "title": "Immigration Business Documents for U.S. Immigration Counsel",
+  "description": "Business plans, financial models, market analysis, org charts, economic impact studies, and RFE audits for E-2, L-1, EB-1C, EB-2 NIW, EB-1A, and EB-5 matters. Prepared for counsel's review. VAMA is not a law firm.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/request-scope/",
+  "title": "Request a Scope Discussion - Immigration Business Documents",
+  "description": "Tell us the visa category, the documents, and the deadline. We reply within 1 business day with a yes, a no, or up to 5 clarifying questions. No confidential files through this form.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/request-scope/received/",
+  "title": "Scope Request Received - What Happens This Week",
+  "description": "Your scope request has reached VAMA. Here is what happens over the next few days, and what a complete intake looks like.",
+  "section": "immigration",
+  "noindex": true
+ },
+ {
+  "path": "/",
+  "title": "VAMA Consulting Group - Immigration Business Documents and AI Operations Audits",
+  "description": "Business plans, financial models, and economic impact studies for U.S. immigration counsel - and fixed-scope audits that show owner-led businesses where leads, quotes, and staff time leak before they spend on AI.",
+  "section": "home",
+  "noindex": false
+ },
+ {
+  "path": "/insights/cost-of-slow-quote-follow-up/",
+  "title": "How to Put a Number on a Slow Quote Follow-Up",
+  "description": "A worked example for service businesses - estimate the gross profit at risk from unchased quotes as a low, base, and high range, using data you already have.",
+  "section": "insights",
+  "noindex": false
+ },
+ {
+  "path": "/insights/",
+  "title": "Insights for Immigration Counsel and Operators",
+  "description": "Practical notes for immigration counsel on business plans, financial models, and RFEs - and for operators on pricing workflow delays and deciding when AI is worth it.",
+  "section": "insights",
+  "noindex": false
+ },
+ {
+  "path": "/insights/rfe-business-document-audit-checklist/",
+  "title": "The RFE Business-Document Audit - What to Check Before Anyone Rewrites",
+  "description": "When an RFE questions the business plan or financials, the instinct is to rewrite the named section. Here is why an audit comes first, what it checks, and what an issue matrix looks like.",
+  "section": "insights",
+  "noindex": false
+ },
+ {
+  "path": "/insights/usable-financial-model-immigration-business-plan/",
+  "title": "What a Usable Financial Model Looks Like in an Immigration Business Plan",
+  "description": "A 10-minute check counsel can run on any immigration business plan's financial model - assumptions, revenue build, staffing tie-out, investment use, cash flow, and sensitivity.",
+  "section": "insights",
+  "noindex": false
+ },
+ {
+  "path": "/insights/when-not-to-buy-the-ai-tool/",
+  "title": "Why We Sometimes Tell a Client Not to Buy the AI Tool",
+  "description": "Five signals that an AI tool or automation won't pay for itself yet - and a simple payback test to run before you sign up for anything.",
+  "section": "insights",
+  "noindex": false
+ },
+ {
+  "path": "/other-advisory/",
+  "title": "Other Advisory - Business Plans, Strategy, and Grant Work",
+  "description": "Beyond its two core practices, VAMA takes selected business-plan, financial-model, market-analysis, strategy, and nonprofit grant engagements, in English and Serbian.",
+  "section": "none",
+  "noindex": false
+ },
+ {
+  "path": "/privacy/",
+  "title": "Privacy and Website Information",
+  "description": "How VAMA Consulting Group handles information submitted through this website, and the legal details of the business that operates it.",
+  "section": "none",
+  "noindex": false
+ },
+ {
+  "path": "/work/",
+  "title": "Work - Case Library, Sample Audit, and Client Feedback",
+  "description": "Evidence behind VAMA's two practices - an anonymized immigration case library filterable by visa, a sample AI Revenue Leakage Audit, and verified client feedback.",
+  "section": "work",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/e-2-business-plan/",
+  "title": "E-2 Business Plan and Financial Model for Immigration Counsel",
+  "description": "E-2 treaty investor business plans, 5-year financial models, staffing plans, and investment-use summaries prepared for counsel's review. Business analysis only - counsel keeps legal strategy.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/l-1-business-plan/",
+  "title": "L-1 New Office Business Plan and Org Charts for Immigration Counsel",
+  "description": "L-1A and L-1B business plans, parent-to-U.S. relationship narratives, staffing roadmaps, projected org charts, and financial models prepared for counsel's review.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/eb-1c-business-plan/",
+  "title": "EB-1C Business Plan, Org Charts, and Executive-Role Analysis",
+  "description": "EB-1C business plans, foreign and U.S. organization comparisons, executive-role analysis, org charts, and financial analysis prepared for immigration counsel.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/eb-2-niw-business-plan/",
+  "title": "EB-2 NIW Business Plan and Economic Impact Study for Immigration Counsel",
+  "description": "EB-2 NIW endeavor business plans, market reports, economic impact studies, financial models, and evidence maps prepared for counsel's review.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/eb-1a-business-plan/",
+  "title": "EB-1A Business and Professional Plan Documentation",
+  "description": "EB-1A professional and business plans, supporting market research, and performance-measurement annexes that describe the applicant's continuing work in the United States.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/eb-5-business-plan/",
+  "title": "EB-5 Business Plan, Capital Deployment, and Job-Creation Analysis",
+  "description": "EB-5 comprehensive business plans with capital-deployment schedules, source-of-funds frameworks, financial models, and job-creation studies with a disclosed method.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/immigration-documents/rfe-audit/",
+  "title": "RFE Business-Document Audit and Repair for Immigration Counsel",
+  "description": "RFE audits of business plans, financial models, and economic impact studies: an issue matrix first, then targeted repair and an exhibit index for counsel.",
+  "section": "immigration",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/lead-response-and-quoting/",
+  "title": "Lead Response and Quote Follow-Up Audit for Service Businesses",
+  "description": "Find the inquiries and quotes that go quiet. A fixed-scope audit of lead response and quote follow-up for field services, trades, and professional firms.",
+  "section": "ai",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/scheduling-and-dispatch/",
+  "title": "Scheduling, Dispatch, and Job-to-Invoice Workflow Audit",
+  "description": "A fixed-scope audit of scheduling, dispatch, job notes, and invoicing for teams that move technicians, crews, or appointments every day.",
+  "section": "ai",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/documents-and-approvals/",
+  "title": "Document, Intake, and Approval Chain Workflow Audit",
+  "description": "A fixed-scope audit of intake, document preparation, review, and sign-off for professional firms and operations teams.",
+  "section": "ai",
+  "noindex": false
+ },
+ {
+  "path": "/ai-operations/multi-location-follow-up/",
+  "title": "Multi-Location Lead Follow-Up and Reporting Audit",
+  "description": "A fixed-scope audit of lead routing, follow-up, and reporting across locations, branches, or territories.",
+  "section": "ai",
+  "noindex": false
+ }
+]
