@@ -100,7 +100,7 @@
  {
   "path": "/",
   "title": "VAMA Consulting Group - Business Evidence for Immigration Counsel, Workflow Audits for Service Businesses",
-  "description": "Business plans, financial models and economic impact studies prepared for U.S. immigration counsel's review, and a fixed-scope Revenue Leakage Audit of one workflow for owner-led service businesses. Every number with a source.",
+  "description": "Business plans and financial analysis for U.S. immigration counsel, and workflow audits for service businesses considering automation or AI. Sources identified, assumptions explained, work you can review.",
   "section": "home",
   "noindex": false
  },
@@ -151,6 +151,27 @@
   "title": "Privacy and Website Information",
   "description": "How VAMA Consulting Group handles information submitted through this website, and the legal details of the business that operates it.",
   "section": "none",
+  "noindex": false
+ },
+ {
+  "path": "/work/healthcare-technology-market-research/",
+  "title": "Case Story - Connecting Healthcare-Technology Research to a Proposal and Pitch",
+  "description": "A market-research case story bringing market context, potential users, competing solutions and routes to market into the commercial-planning materials for a healthcare-technology project.",
+  "section": "work",
+  "noindex": false
+ },
+ {
+  "path": "/work/professional-services-expansion-plan/",
+  "title": "Case Story - How Investment Supports a Professional-Services Expansion",
+  "description": "A business-documentation case story connecting a professional-services firm's service model, use of investment, operating responsibilities and financial projections, prepared for counsel's review.",
+  "section": "work",
+  "noindex": false
+ },
+ {
+  "path": "/work/rental-business-financial-plan/",
+  "title": "Case Story - Connecting Fleet Growth, Demand and Cash in a Rental-Business Plan",
+  "description": "A financial-planning case story showing how a vehicle-rental business's expansion assumptions were translated into operating drivers, cash considerations and responses to downside scenarios.",
+  "section": "work",
   "noindex": false
  },
  {

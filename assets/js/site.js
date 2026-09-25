@@ -72,21 +72,27 @@
   }
 
   /* ---------------- Layered heroes: scroll + pointer, transform only ---------------- */
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduceMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ.matches;
+  reduceMQ.addEventListener && reduceMQ.addEventListener("change", function (e) { reduce = e.matches; doc.classList.toggle("reduce-motion", reduce); });
+  doc.classList.toggle("reduce-motion", reduce);
   var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var wideEnough = window.matchMedia("(min-width: 901px)").matches;
   document.querySelectorAll(".hero-stage").forEach(function (stage) {
     stage.querySelectorAll(".plane").forEach(function (pl) { pl.style.setProperty("--rate", pl.getAttribute("data-rate") || "0.3"); });
     requestAnimationFrame(function () { stage.classList.add("is-live"); });
-    if (reduce) return;
-    var ticking = false;
+    if (reduce || !wideEnough) return;
+    var ticking = false, inView = true;
     function update() {
       ticking = false;
+      if (!inView || reduce) return;
       var r = stage.getBoundingClientRect();
       var vh = window.innerHeight || 1;
       var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));  // 0 entering, 1 leaving
       stage.style.setProperty("--hp", (p - 0.5).toFixed(3));
     }
-    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { inView = en[0].isIntersecting; }, { threshold: 0 }).observe(stage);
+    window.addEventListener("scroll", function () { if (inView && !ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     update();
     if (finePointer) {
       var host = stage.closest(".page-hero, .home-hero") || stage;
@@ -259,8 +265,25 @@
   }
 
   function goSuccess(url, via) {
-    if (!url) return;
-    setTimeout(function () { window.location.href = url + (via === "email" ? "?via=email" : ""); }, via === "email" ? 900 : 50);
+    if (!url || via !== "endpoint") return;   // only a confirmed delivery reaches the received page
+    setTimeout(function () { window.location.href = url; }, 50);
+  }
+
+  function showEmailState(form, inbox, subject, rows) {
+    // Nothing was delivered by this page: say so, keep the answers, offer the copy.
+    var s = form.querySelector(".form-status");
+    if (!s) return;
+    var text = "To: " + inbox + "\nSubject: " + subject + "\n\n" + summaryText(rows);
+    s.innerHTML = '<div class="form-sent" role="status"><strong>One more step: press Send in your email app.</strong>' +
+      "<p>Your request opened as a pre-filled email to <a href=\"mailto:" + inbox + "\">" + inbox + "</a>. It is delivered only when you send it. Nothing was submitted from this page.</p>" +
+      "<p>If your email app did not open, copy the text below into a new message.</p><pre>" + text.replace(/</g, "&lt;") + "</pre>" +
+      '<button type="button" class="btn btn--ghost" data-copy-request>Copy request text</button></div>';
+    var btn = s.querySelector("[data-copy-request]");
+    btn.addEventListener("click", function () {
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+        .then(function () { btn.textContent = "Copied"; }).catch(function () { btn.textContent = "Select the text above to copy"; });
+    });
+    s.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   }
 
   function statusMsg(form, html, kind) {
@@ -328,6 +351,7 @@
       send(imm, { inbox: "immigration", subject: subject, rows: rows })
         .then(function (via) {
           window.vamaTrack("scope_request_submitted", { visa: visa, rush: isRush, via: via });
+          if (via === "email") { if (btn) { btn.disabled = false; btn.textContent = "Send the matter details"; } showEmailState(imm, emailFor("immigration"), subject, rows); }
           goSuccess(imm.getAttribute("data-success"), via);
         })
         .catch(function () {
@@ -349,7 +373,11 @@
       var btn = gen.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
       send(gen, { inbox: "general", subject: "Website inquiry - " + topic, rows: rows })
-        .then(function (via) { window.vamaTrack("general_inquiry_submitted", { topic: topic, via: via }); goSuccess(gen.getAttribute("data-success"), via); })
+        .then(function (via) {
+          window.vamaTrack("general_inquiry_submitted", { topic: topic, via: via });
+          if (via === "email") { if (btn) { btn.disabled = false; btn.textContent = "Send message"; } showEmailState(gen, emailFor("general"), "Website inquiry - " + topic, rows); }
+          goSuccess(gen.getAttribute("data-success"), via);
+        })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.textContent = "Send message"; }
           statusMsg(gen, "<strong>That did not go through.</strong> Please email <a href=\"mailto:" + emailFor("general") + "\">" + emailFor("general") + "</a>.", "no");
@@ -360,6 +388,9 @@
   /* ---------------- AI fit-call qualifier + calendar ---------------- */
   var fit = document.getElementById("fit-form");
   if (fit) {
+    var hasAiEndpoint = !!endpointFor("ai");
+    document.querySelectorAll("[data-if-endpoint]").forEach(function (el) { el.hidden = !hasAiEndpoint; });
+    document.querySelectorAll("[data-if-no-endpoint]").forEach(function (el) { el.hidden = hasAiEndpoint; });
     var stepQualify = document.getElementById("step-qualify");
     var stepBook = document.getElementById("step-book");
     var noPanel = document.getElementById("fit-no");
@@ -480,6 +511,68 @@
       stepBook.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
+
+  /* ---------------- Selected work tabs ---------------- */
+  document.querySelectorAll("[data-work-tabs]").forEach(function (host) {
+    var tabs = host.querySelectorAll(".work-tabs button");
+    var panels = host.querySelectorAll(".work-panel");
+    function show(id) {
+      tabs.forEach(function (t) { t.setAttribute("aria-pressed", t.getAttribute("data-panel") === id ? "true" : "false"); });
+      panels.forEach(function (p) { p.hidden = p.id !== id; });
+      window.vamaTrack("work_tab", { panel: id });
+    }
+    tabs.forEach(function (t) { t.addEventListener("click", function () { show(t.getAttribute("data-panel")); }); });
+    if (tabs.length) show(tabs[0].getAttribute("data-panel"));
+  });
+
+  /* ---------------- Connected evidence: one assumption, three documents ---------------- */
+  document.querySelectorAll("[data-evidence-demo]").forEach(function (ev) {
+    var COST = 5400, BASE_ANNUAL = 3 * 4900 * 12;   // illustrative: 3 existing roles at $4,900 loaded monthly
+    var fmt = function (n) { return "$" + n.toLocaleString("en-US"); };
+    var docs = ev.querySelectorAll(".ev-doc");
+    var bars = ev.querySelectorAll(".ev-bar");
+    var timer = [];
+    function set(m, animate) {
+      ev.querySelectorAll("[data-ev-month]").forEach(function (el) { el.textContent = m; });
+      ev.querySelectorAll("[data-ev-month-name]").forEach(function (el) { el.textContent = "month " + m; });
+      var y1 = COST * (13 - m);
+      ev.querySelectorAll("[data-ev-y1]").forEach(function (el) { el.textContent = fmt(y1); });
+      ev.querySelectorAll("[data-ev-total]").forEach(function (el) { el.textContent = fmt(BASE_ANNUAL + y1); });
+      ev.querySelectorAll("[data-ev-hc]").forEach(function (el) { el.textContent = "4"; });
+      bars.forEach(function (b) { var bm = +b.getAttribute("data-m"); b.classList.toggle("is-up", bm >= m); b.classList.toggle("is-start", bm === m); });
+      ev.querySelectorAll("[data-ev]").forEach(function (btn) { btn.setAttribute("aria-pressed", +btn.getAttribute("data-ev") === m ? "true" : "false"); });
+      timer.forEach(clearTimeout); timer = [];
+      docs.forEach(function (d) { d.classList.remove("is-hot"); });
+      if (!animate || reduce) return;
+      docs.forEach(function (d, i) {
+        timer.push(setTimeout(function () { d.classList.add("is-hot"); }, 80 + i * 320));
+        timer.push(setTimeout(function () { d.classList.remove("is-hot"); }, 80 + i * 320 + 900));
+      });
+    }
+    ev.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-ev]");
+      if (!b) return;
+      set(+b.getAttribute("data-ev"), true);
+      window.vamaTrack("evidence_demo", { month: b.getAttribute("data-ev") });
+    });
+    set(4, false);
+  });
+
+  /* ---------------- Audit path: workflow -> evidence -> options -> next step ---------------- */
+  document.querySelectorAll("[data-audit-path]").forEach(function (ap) {
+    var steps = ap.querySelectorAll(".ap__step");
+    ap.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-ap]");
+      if (!b) return;
+      var i = b.getAttribute("data-ap");
+      steps.forEach(function (st) {
+        var on = st.getAttribute("data-ap-step") === i;
+        st.classList.toggle("is-active", on);
+        st.querySelector(".ap__tab").setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      window.vamaTrack("audit_path", { step: i });
+    });
+  });
 
   /* ---------------- Received pages ---------------- */
   var summary = document.querySelector("[data-request-summary]");
